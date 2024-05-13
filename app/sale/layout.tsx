@@ -1,16 +1,10 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import '@/styles/globals.css';
+import Header from '@/components/header';
+import Foot from '@/components/foot';
 
 const inter = Inter({ subsets: ['latin'] });
-
-export const metadata: Metadata = {
-  title: '쿠팡',
-  description: '쿠파파ㅇ',
-  icons: {
-    icon: '/coupang.png',
-  },
-};
 
 export default function RootLayout({
   children,
@@ -18,9 +12,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <link rel='icon' href='/coupang.png' />
-      <body className={inter.className}>{children}</body>
-    </html>
+    <div>
+      <Header />
+      {children}
+      <Foot />
+    </div>
   );
 }
