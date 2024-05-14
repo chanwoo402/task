@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Header() {
   return (
@@ -23,7 +24,9 @@ export default function Header() {
           </svg>
         </div>
         <div className='ml-auto'>
-          <span className='mr-4'>로그인</span>
+          <span className='mr-4'>
+            <Link href={'/login'}>로그인</Link>
+          </span>
           <span className='mr-4'>회원가입</span>
           <span>고객센터</span>
         </div>
