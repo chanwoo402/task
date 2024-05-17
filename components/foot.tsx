@@ -5,9 +5,12 @@ export default function Foot() {
     <div className='mt-10'>
       <div className='border-t-2 text-center py-4'>
         <span className='text-sm text-gray-700'>
-          회사소개 | Investor | Relations | 인재채용 | 입점 / 제휴문의 |
-          공지사항 | 고객의 소리 | 이용약관 | 개인정보 | 처리방침 | 쿠팡페이 |
-          이용약관 | 쿠팡페이 | 개인정보처리방침 | 신뢰관리센터 | 제휴마케팅 |
+          회사소개 &nbsp;|&nbsp; Investor &nbsp;|&nbsp; Relations &nbsp;|&nbsp;
+          인재채용 &nbsp;|&nbsp; 입점 / 제휴문의 &nbsp;|&nbsp; 공지사항
+          &nbsp;|&nbsp; 고객의 소리 &nbsp;|&nbsp; 이용약관 &nbsp;|&nbsp;
+          개인정보 &nbsp;|&nbsp; 처리방침 &nbsp;|&nbsp; 쿠팡페이 &nbsp;|&nbsp;
+          이용약관 &nbsp;|&nbsp; 쿠팡페이 &nbsp;|&nbsp; 개인정보처리방침
+          &nbsp;|&nbsp; 신뢰관리센터 &nbsp;|&nbsp; 제휴마케팅 &nbsp;|&nbsp;
           광고안내
         </span>
       </div>

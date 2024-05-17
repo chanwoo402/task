@@ -27,7 +27,9 @@ export default function Header() {
           <span className='mr-4'>
             <Link href={'/login'}>로그인</Link>
           </span>
-          <span className='mr-4'>회원가입</span>
+          <span className='mr-4'>
+            <Link href={'/login/sign-up'}>회원가입</Link>
+          </span>
           <span>고객센터</span>
         </div>
       </div>
@@ -87,8 +89,8 @@ export default function Header() {
               <div className='p-2 flex '>
                 <input
                   type='text'
-                  placeholder='찾고 싶은 상품을 검색해보세요!'
-                  className='w-96'
+                  placeholder='찾고 싶은 상품을 검색해f보세요!'
+                  className='w-96 border-none'
                 />
               </div>
               <div className='flex ml-auto m-2'>

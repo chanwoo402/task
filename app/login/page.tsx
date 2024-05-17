@@ -1,10 +1,13 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function login() {
   return (
     <div>
       <div className='flex justify-center mt-12 mb-4'>
-        <Image src='/download.png' alt='쿠팡로고' width={195} height={41} />
+        <Link href={'/sale'}>
+          <Image src='/download.png' alt='쿠팡로고' width={195} height={41} />
+        </Link>
       </div>
       <div className='flex justify-center border-b-2'>
         <div className='border-b-blue-500 border-b-4 px-5'>
@@ -122,9 +125,11 @@ export default function login() {
             </button>
           </div>
           <div className='pt-4 border-t border-gray-400'>
-            <button className='w-full py-3 rounded border border-gray-400'>
-              회원가입
-            </button>
+            <Link href={'/login/sign-up'}>
+              <button className='w-full py-3 rounded border border-gray-400'>
+                회원가입
+              </button>
+            </Link>
           </div>
 
           <div className='text-gray-500 text-xs flex flex-col mt-5'>

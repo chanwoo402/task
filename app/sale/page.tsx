@@ -1,3 +1,7 @@
 export default function sale() {
-  return <div></div>;
+  return (
+    <div>
+      <p>fd</p>
+    </div>
+  );
 }
