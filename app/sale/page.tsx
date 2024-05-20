@@ -106,7 +106,51 @@ export default function Sale() {
             <span className='text-blue-700'> 로켓직구 글로벌특가</span>{' '}
           </span>
           <div className='flex'>
-            <div className='flex flex-col'>fsdfd</div>
+            <div className='flex flex-col mr-16'>
+              <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
+              <p className='text-xs font-bold text-red-500'>
+                ％ 지금 58% 할인 중
+              </p>
+              <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
+              <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
+              <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+            </div>
+            <div className='flex flex-col mr-16'>
+              <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
+              <p className='text-xs font-bold text-red-500'>
+                ％ 지금 58% 할인 중
+              </p>
+              <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
+              <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
+              <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+            </div>
+            <div className='flex flex-col mr-16'>
+              <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
+              <p className='text-xs font-bold text-red-500'>
+                ％ 지금 58% 할인 중
+              </p>
+              <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
+              <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
+              <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+            </div>
+            <div className='flex flex-col mr-16'>
+              <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
+              <p className='text-xs font-bold text-red-500'>
+                ％ 지금 58% 할인 중
+              </p>
+              <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
+              <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
+              <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+            </div>
+            <div className='flex flex-col'>
+              <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
+              <p className='text-xs font-bold text-red-500'>
+                ％ 지금 58% 할인 중
+              </p>
+              <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
+              <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
+              <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+            </div>
           </div>
         </div>
       </div>
