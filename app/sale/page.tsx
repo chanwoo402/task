@@ -101,11 +101,13 @@ export default function Sale() {
               </div>
             </div>
           </div>
-          <span className='text-2xl font-bold'>
-            전세계 핫딜
-            <span className='text-blue-700'> 로켓직구 글로벌특가</span>{' '}
-          </span>
-          <div className='flex'>
+          <div className='mt-7'>
+            <span className='text-2xl font-bold mt-5'>
+              전세계 핫딜
+              <span className='text-blue-700'> 로켓직구 글로벌특가</span>{' '}
+            </span>
+          </div>
+          <div className='flex justify-center mt-3'>
             <div className='flex flex-col mr-16'>
               <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
               <p className='text-xs font-bold text-red-500'>

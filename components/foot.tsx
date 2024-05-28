@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function Foot() {
   return (
-    <div className='mt-10'>
+    <div className='mt-10 bg-white'>
       <div className='border-t-2 text-center py-4'>
         <span className='text-sm text-gray-700'>
           회사소개 &nbsp;|&nbsp; Investor &nbsp;|&nbsp; Relations &nbsp;|&nbsp;
