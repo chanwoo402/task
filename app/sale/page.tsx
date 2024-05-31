@@ -1,16 +1,19 @@
+import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Sale() {
   return (
     <div>
-      <div className='relative w-full h-0 pb-[30%] mt-1'>
-        <Image
-          src='/광고1.png'
-          alt='쿠팡로고'
-          layout='fill'
-          objectFit='cover'
-        />
-      </div>
+      <Link href={'/sale/product'}>
+        <div className='relative w-full h-0 pb-[30%] mt-1'>
+          <Image
+            src='/광고1.png'
+            alt='쿠팡로고'
+            layout='fill'
+            objectFit='cover'
+          />
+        </div>
+      </Link>
       <div className='flex justify-center items-center mt-10'>
         <div className='w-5/6'>
           <div className=' flex'>
@@ -21,84 +24,100 @@ export default function Sale() {
           </div>
           <div className='mt-4 border border-gray-300 grid grid-cols-4 gap-4 p-3'>
             <div className='col-span-2 p-2 border border-gray-300'>
-              <div className='relative w-full h-0 pb-[55%]'>
-                <Image
-                  src='/광고.jpg'
-                  alt='쿠팡로고'
-                  layout='fill'
-                  objectFit='cover'
-                />
-              </div>
+              <Link href={'/sale/product'}>
+                <div className='relative w-full h-0 pb-[55%]'>
+                  <Image
+                    src='/광고.jpg'
+                    alt='쿠팡로고'
+                    layout='fill'
+                    objectFit='cover'
+                  />
+                </div>
+              </Link>
             </div>
             <div className='col-span-2 p-2 border border-gray-300'>
-              <div className='relative w-full h-0 pb-[55%]'>
-                <Image
-                  src='/광고.jpg'
-                  alt='쿠팡로고'
-                  layout='fill'
-                  objectFit='cover'
-                />
-              </div>
+              <Link href={'/sale/product'}>
+                <div className='relative w-full h-0 pb-[55%]'>
+                  <Image
+                    src='/광고.jpg'
+                    alt='쿠팡로고'
+                    layout='fill'
+                    objectFit='cover'
+                  />
+                </div>
+              </Link>
             </div>
             <div className='col-span-1 p-2 border border-gray-300'>
-              <div className='relative w-full h-0 pb-[130%]'>
-                <Image
-                  src='/광고2.png'
-                  alt='쿠팡로고'
-                  layout='fill'
-                  objectFit='cover'
-                />
-              </div>
+              <Link href={'/sale/product'}>
+                <div className='relative w-full h-0 pb-[130%]'>
+                  <Image
+                    src='/광고2.png'
+                    alt='쿠팡로고'
+                    layout='fill'
+                    objectFit='cover'
+                  />
+                </div>
+              </Link>
             </div>
             <div className='col-span-1 p-2 border border-gray-300'>
-              <div className='relative w-full h-0 pb-[130%]'>
-                <Image
-                  src='/광고2.png'
-                  alt='쿠팡로고'
-                  layout='fill'
-                  objectFit='cover'
-                />
-              </div>
+              <Link href={'/sale/product'}>
+                <div className='relative w-full h-0 pb-[130%]'>
+                  <Image
+                    src='/광고2.png'
+                    alt='쿠팡로고'
+                    layout='fill'
+                    objectFit='cover'
+                  />
+                </div>
+              </Link>
             </div>
             <div className='col-span-1 p-2 border border-gray-300'>
-              <div className='relative w-full h-0 pb-[130%]'>
-                <Image
-                  src='/광고2.png'
-                  alt='쿠팡로고'
-                  layout='fill'
-                  objectFit='cover'
-                />
-              </div>
+              <Link href={'/sale/product'}>
+                <div className='relative w-full h-0 pb-[130%]'>
+                  <Image
+                    src='/광고2.png'
+                    alt='쿠팡로고'
+                    layout='fill'
+                    objectFit='cover'
+                  />
+                </div>
+              </Link>
             </div>
             <div className='col-span-1 p-2 border border-gray-300'>
-              <div className='relative w-full h-0 pb-[130%]'>
-                <Image
-                  src='/광고2.png'
-                  alt='쿠팡로고'
-                  layout='fill'
-                  objectFit='cover'
-                />
-              </div>
+              <Link href={'/sale/product'}>
+                <div className='relative w-full h-0 pb-[130%]'>
+                  <Image
+                    src='/광고2.png'
+                    alt='쿠팡로고'
+                    layout='fill'
+                    objectFit='cover'
+                  />
+                </div>
+              </Link>
             </div>
             <div className='col-span-2 p-2 border border-gray-300'>
-              <div className='relative w-full h-0 pb-[55%]'>
-                <Image
-                  src='/광고.jpg'
-                  alt='쿠팡로고'
-                  layout='fill'
-                  objectFit='cover'
-                />
-              </div>
+              <Link href={'/sale/product'}>
+                <div className='relative w-full h-0 pb-[55%]'>
+                  <Image
+                    src='/광고.jpg'
+                    alt='쿠팡로고'
+                    layout='fill'
+                    objectFit='cover'
+                  />
+                </div>
+              </Link>
             </div>
             <div className='col-span-2 p-2 border border-gray-300'>
-              <div className='relative w-full h-0 pb-[55%]'>
-                <Image
-                  src='/광고.jpg'
-                  alt='쿠팡로고'
-                  layout='fill'
-                  objectFit='cover'
-                />
-              </div>
+              <Link href={'/sale/product'}>
+                <div className='relative w-full h-0 pb-[55%]'>
+                  <Image
+                    src='/광고.jpg'
+                    alt='쿠팡로고'
+                    layout='fill'
+                    objectFit='cover'
+                  />
+                </div>
+              </Link>
             </div>
           </div>
           <div className='mt-7'>
@@ -109,49 +128,59 @@ export default function Sale() {
           </div>
           <div className='flex justify-center mt-3'>
             <div className='flex flex-col mr-16'>
-              <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
-              <p className='text-xs font-bold text-red-500'>
-                ％ 지금 58% 할인 중
-              </p>
-              <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-              <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-              <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+              <Link href={'/sale/product'}>
+                <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
+                <p className='text-xs font-bold text-red-500'>
+                  ％ 지금 58% 할인 중
+                </p>
+                <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
+                <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
+                <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+              </Link>
             </div>
             <div className='flex flex-col mr-16'>
-              <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
-              <p className='text-xs font-bold text-red-500'>
-                ％ 지금 58% 할인 중
-              </p>
-              <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-              <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-              <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+              <Link href={'/sale/product'}>
+                <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
+                <p className='text-xs font-bold text-red-500'>
+                  ％ 지금 58% 할인 중
+                </p>
+                <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
+                <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
+                <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+              </Link>
             </div>
             <div className='flex flex-col mr-16'>
-              <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
-              <p className='text-xs font-bold text-red-500'>
-                ％ 지금 58% 할인 중
-              </p>
-              <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-              <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-              <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+              <Link href={'/sale/product'}>
+                <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
+                <p className='text-xs font-bold text-red-500'>
+                  ％ 지금 58% 할인 중
+                </p>
+                <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
+                <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
+                <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+              </Link>
             </div>
             <div className='flex flex-col mr-16'>
-              <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
-              <p className='text-xs font-bold text-red-500'>
-                ％ 지금 58% 할인 중
-              </p>
-              <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-              <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-              <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+              <Link href={'/sale/product'}>
+                <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
+                <p className='text-xs font-bold text-red-500'>
+                  ％ 지금 58% 할인 중
+                </p>
+                <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
+                <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
+                <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+              </Link>
             </div>
             <div className='flex flex-col'>
-              <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
-              <p className='text-xs font-bold text-red-500'>
-                ％ 지금 58% 할인 중
-              </p>
-              <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-              <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-              <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+              <Link href={'/sale/product'}>
+                <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
+                <p className='text-xs font-bold text-red-500'>
+                  ％ 지금 58% 할인 중
+                </p>
+                <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
+                <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
+                <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+              </Link>
             </div>
           </div>
         </div>

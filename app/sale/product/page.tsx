@@ -1,3 +1,4 @@
+import { Link } from '@nextui-org/react';
 import Image from 'next/image';
 
 export default function Product() {
@@ -109,117 +110,197 @@ export default function Product() {
             </div>
           </div>
         </div>
-
-        <div className='mt-7 ml-16'>
-          <span className='text-2xl font-bold mt-5'>
-            오늘의
-            <span className='text-red-700'> 판매자 특가</span>
-          </span>
-        </div>
-        <div className='flex justify-center mt-5'>
-          <div className='flex flex-col mr-16'>
-            <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
-
-            <p className='text-xs font-bold text-red-500'>
-              ％ 지금 58% 할인 중
-            </p>
-            <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-            <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-            <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
-          </div>
-          <div className='flex flex-col mr-16'>
-            <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
-            <p className='text-xs font-bold text-red-500'>
-              ％ 지금 58% 할인 중
-            </p>
-            <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-            <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-            <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
-          </div>
-          <div className='flex flex-col mr-16'>
-            <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
-            <p className='text-xs font-bold text-red-500'>
-              ％ 지금 58% 할인 중
-            </p>
-            <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-            <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-            <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
-          </div>
-          <div className='flex flex-col mr-16'>
-            <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
-            <p className='text-xs font-bold text-red-500'>
-              ％ 지금 58% 할인 중
-            </p>
-            <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-            <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-            <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
-          </div>
-          <div className='flex flex-col'>
-            <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
-            <p className='text-xs font-bold text-red-500'>
-              ％ 지금 58% 할인 중
-            </p>
-            <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-            <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-            <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
-          </div>
-        </div>
-        <div className='mt-10 ml-16'>
-          <span className='text-2xl font-bold mt-5'>
-            전세계 핫딜
-            <span className='text-blue-700'> 로켓직구 글로벌특가</span>
-          </span>
-        </div>
-        <div className='flex justify-center mt-5'>
-          <div className='flex flex-col mr-16'>
-            <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
-
-            <p className='text-xs font-bold text-red-500'>
-              ％ 지금 58% 할인 중
-            </p>
-            <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-            <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-            <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
-          </div>
-          <div className='flex flex-col mr-16'>
-            <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
-            <p className='text-xs font-bold text-red-500'>
-              ％ 지금 58% 할인 중
-            </p>
-            <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-            <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-            <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
-          </div>
-          <div className='flex flex-col mr-16'>
-            <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
-            <p className='text-xs font-bold text-red-500'>
-              ％ 지금 58% 할인 중
-            </p>
-            <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-            <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-            <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
-          </div>
-          <div className='flex flex-col mr-16'>
-            <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
-            <p className='text-xs font-bold text-red-500'>
-              ％ 지금 58% 할인 중
-            </p>
-            <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-            <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-            <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
-          </div>
-          <div className='flex flex-col'>
-            <Image src='/coupang.png' width={150} height={150} alt='어쩔' />
-            <p className='text-xs font-bold text-red-500'>
-              ％ 지금 58% 할인 중
-            </p>
-            <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-            <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-            <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+      </div>
+      <div className='flex justify-center mt-5'>
+        <div className='flex flex-col'>
+          <div>
+            <span className='text-2xl font-bold my-5'>
+              오늘의
+              <span className='text-red-700'> 판매자 특가</span>
+            </span>
+            <div className='flex mt-3'>
+              <div className='flex flex-col mr-16'>
+                <Link href={'/sale/product'}>
+                  <Image
+                    src='/coupang.png'
+                    width={150}
+                    height={150}
+                    alt='어쩔'
+                  />
+                  <p className='text-xs font-bold text-red-500'>
+                    ％ 지금 58% 할인 중
+                  </p>
+                  <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
+                  <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
+                  <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+                </Link>
+              </div>
+              <div className='flex flex-col mr-16'>
+                <Link href={'/sale/product'}>
+                  <Image
+                    src='/coupang.png'
+                    width={150}
+                    height={150}
+                    alt='어쩔'
+                  />
+                  <p className='text-xs font-bold text-red-500'>
+                    ％ 지금 58% 할인 중
+                  </p>
+                  <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
+                  <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
+                  <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+                </Link>
+              </div>
+              <div className='flex flex-col mr-16'>
+                <Link href={'/sale/product'}>
+                  <Image
+                    src='/coupang.png'
+                    width={150}
+                    height={150}
+                    alt='어쩔'
+                  />
+                  <p className='text-xs font-bold text-red-500'>
+                    ％ 지금 58% 할인 중
+                  </p>
+                  <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
+                  <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
+                  <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+                </Link>
+              </div>
+              <div className='flex flex-col mr-16'>
+                <Link href={'/sale/product'}>
+                  <Image
+                    src='/coupang.png'
+                    width={150}
+                    height={150}
+                    alt='어쩔'
+                  />
+                  <p className='text-xs font-bold text-red-500'>
+                    ％ 지금 58% 할인 중
+                  </p>
+                  <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
+                  <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
+                  <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+                </Link>
+              </div>
+              <div className='flex flex-col'>
+                <Link href={'/sale/product'}>
+                  <Image
+                    src='/coupang.png'
+                    width={150}
+                    height={150}
+                    alt='어쩔'
+                  />
+                  <p className='text-xs font-bold text-red-500'>
+                    ％ 지금 58% 할인 중
+                  </p>
+                  <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
+                  <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
+                  <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div className='mt-10 grid grid-cols-8 mx-20 border-t-2 border-black '>
+
+      <div className='flex justify-center mt-10'>
+        <div className='flex flex-col'>
+          <div>
+            <span className='text-2xl font-bold my-5'>
+              오늘의
+              <span className='text-red-700'> 판매자 특가</span>
+            </span>
+            <div className='flex mt-3'>
+              <div className='flex flex-col mr-16'>
+                <Link href={'/sale/product'}>
+                  <Image
+                    src='/coupang.png'
+                    width={150}
+                    height={150}
+                    alt='어쩔'
+                  />
+                  <p className='text-xs font-bold text-red-500'>
+                    ％ 지금 58% 할인 중
+                  </p>
+                  <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
+                  <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
+                  <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+                </Link>
+              </div>
+              <div className='flex flex-col mr-16'>
+                <Link href={'/sale/product'}>
+                  <Image
+                    src='/coupang.png'
+                    width={150}
+                    height={150}
+                    alt='어쩔'
+                  />
+                  <p className='text-xs font-bold text-red-500'>
+                    ％ 지금 58% 할인 중
+                  </p>
+                  <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
+                  <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
+                  <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+                </Link>
+              </div>
+              <div className='flex flex-col mr-16'>
+                <Link href={'/sale/product'}>
+                  <Image
+                    src='/coupang.png'
+                    width={150}
+                    height={150}
+                    alt='어쩔'
+                  />
+                  <p className='text-xs font-bold text-red-500'>
+                    ％ 지금 58% 할인 중
+                  </p>
+                  <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
+                  <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
+                  <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+                </Link>
+              </div>
+              <div className='flex flex-col mr-16'>
+                <Link href={'/sale/product'}>
+                  <Image
+                    src='/coupang.png'
+                    width={150}
+                    height={150}
+                    alt='어쩔'
+                  />
+                  <p className='text-xs font-bold text-red-500'>
+                    ％ 지금 58% 할인 중
+                  </p>
+                  <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
+                  <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
+                  <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+                </Link>
+              </div>
+              <div className='flex flex-col'>
+                <Link href={'/sale/product'}>
+                  <Image
+                    src='/coupang.png'
+                    width={150}
+                    height={150}
+                    alt='어쩔'
+                  />
+                  <p className='text-xs font-bold text-red-500'>
+                    ％ 지금 58% 할인 중
+                  </p>
+                  <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
+                  <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
+                  <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className='mt-10 grid grid-cols-8 border-t-2 border-black mx-auto'
+        style={{ width: '1030px' }}
+      >
         <div className='col-span-2  border-x border-gray-300 py-3 text-center'>
           <p>상품상세</p>
         </div>
@@ -273,22 +354,6 @@ export default function Product() {
         <div className='col-span-3 py-3 pl-3 text-xs  border-y border-gray-300'>
           <p>김찬우</p>
         </div>
-
-        <details>
-          <div className='col-span-1 py-3 pl-3 bg-gray-100 text-xs  border-y border-gray-300'>
-            <p>제품명</p>
-          </div>
-          <div className='col-span-3 py-3 pl-3 text-xs  border-y border-gray-300'>
-            <p>김찬우</p>
-          </div>
-          <div className='col-span-1 py-3 pl-3 bg-gray-100 text-xs  border-y border-gray-300'>
-            <p>제품명</p>
-          </div>
-          <div className='col-span-3 py-3 pl-3 text-xs  border-y border-gray-300'>
-            <p>김찬우</p>
-          </div>
-          <summary>fdfd</summary>
-        </details>
       </div>
     </div>
   );
