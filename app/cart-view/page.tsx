@@ -24,7 +24,10 @@ export default function CartView() {
             <Image src='/download.png' width={150} height={70} alt='어쩔' />
           </Link>
         </div>
-        <div className='bg-white border border-gray-300 border-t-2 p-10'>
+        <div
+          className='bg-white border border-gray-300 border-t-2 p-10 mx-auto'
+          style={{ width: '1310px' }}
+        >
           <div className='flex'>
             <Link href={'/sale'}>
               <span className='text-4xl justify-start'>

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Orderlist() {
   return (
@@ -9,33 +10,34 @@ export default function Orderlist() {
             MY쿠팡
           </p>
         </div>
-        <div className='bg-gray-50 border-x border-gray-300 p-4'>
-          <p className='my-3 text-sm font-bold'>MY 쇼핑</p>
-          <p className='mt-1 text-xs text-blue6500'>주문목록/배송조회</p>
-          <p className='mt-1 text-xs'>취소/반품/교환/환불내역</p>
-          <p className='mt-1 text-xs'>와우 멤버십</p>
-          <p className='mt-1 text-xs'>로켓프레시 프레시백</p>
-          <p className='mt-1 text-xs'>정기배송관리</p>
-          <p className='mt-1 text-xs '>영수증 조회/줄력</p>
-        </div>
-        <div className='bg-gray-50 border border-gray-300 p-4'>
-          <p className='my-3 text-sm font-bold'>MY 해택</p>
-          <p className='mt-1 text-xs'>할인쿠폰</p>
-          <p className='mt-1 text-xs'>쿠팡캐시/기프트카드</p>
-        </div>
-        <div className='bg-gray-50 border-x border-gray-300 p-4'>
-          <p className='my-3 text-sm font-bold'>MY 활동</p>
-          <p className='mt-1 text-xs text-blue-500'>문의하기</p>
-          <p className='mt-1 text-xs'>문의내역 확인</p>
-          <p className='mt-1 text-xs'>리뷰관리</p>
-          <p className='mt-1 text-xs'>찜 리스트</p>
-        </div>
-        <div className='bg-gray-50 border border-gray-300 p-4'>
-          <p className='my-3 text-sm font-bold'>MY 해택</p>
-          <p className='mt-1 text-xs'>할인쿠폰</p>
-          <p className='mt-1 text-xs'>쿠팡캐시/기프트카드</p>
-        </div>
-
+        <Link href={'/login/TT'}>
+          <div className='bg-gray-50 border-x border-gray-300 p-4'>
+            <p className='my-3 text-sm font-bold'>MY 쇼핑</p>
+            <p className='mt-1 text-xs text-blue6500'>주문목록/배송조회</p>
+            <p className='mt-1 text-xs'>취소/반품/교환/환불내역</p>
+            <p className='mt-1 text-xs'>와우 멤버십</p>
+            <p className='mt-1 text-xs'>로켓프레시 프레시백</p>
+            <p className='mt-1 text-xs'>정기배송관리</p>
+            <p className='mt-1 text-xs '>영수증 조회/줄력</p>
+          </div>
+          <div className='bg-gray-50 border border-gray-300 p-4'>
+            <p className='my-3 text-sm font-bold'>MY 해택</p>
+            <p className='mt-1 text-xs'>할인쿠폰</p>
+            <p className='mt-1 text-xs'>쿠팡캐시/기프트카드</p>
+          </div>
+          <div className='bg-gray-50 border-x border-gray-300 p-4'>
+            <p className='my-3 text-sm font-bold'>MY 활동</p>
+            <p className='mt-1 text-xs text-blue-500'>문의하기</p>
+            <p className='mt-1 text-xs'>문의내역 확인</p>
+            <p className='mt-1 text-xs'>리뷰관리</p>
+            <p className='mt-1 text-xs'>찜 리스트</p>
+          </div>
+          <div className='bg-gray-50 border border-gray-300 p-4'>
+            <p className='my-3 text-sm font-bold'>MY 해택</p>
+            <p className='mt-1 text-xs'>할인쿠폰</p>
+            <p className='mt-1 text-xs'>쿠팡캐시/기프트카드</p>
+          </div>
+        </Link>
         <div className='border mt-3 p-3 flex'>
           <svg
             xmlns='http://www.w3.org/2000/svg'

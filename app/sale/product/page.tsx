@@ -1,5 +1,6 @@
-import { Link } from '@nextui-org/react';
+import Link from 'next/link';
 import Image from 'next/image';
+import ProductF from '@/components/productGroup';
 
 export default function Product() {
   return (
@@ -104,7 +105,7 @@ export default function Product() {
             </div>
             <div className='py-3 border-t border-gray-200 mb-3'>
               <p className='text-xs'>
-                - 사용기한 : 개봉 후 사용기간의 경우 제조연월일 병행표기
+                - 사용기한 : 개봉 후 사용기간의 경우 제조연월일 병행표기ㅛ
               </p>
               <p className='text-xs'>- 쿠팡상품번호 : 123414214-1241412</p>
             </div>

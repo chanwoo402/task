@@ -1,18 +1,21 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Foot() {
   return (
     <div className='mt-10 bg-white'>
       <div className='border-t-2 text-center py-4'>
-        <span className='text-sm text-gray-700'>
-          회사소개 &nbsp;|&nbsp; Investor &nbsp;|&nbsp; Relations &nbsp;|&nbsp;
-          인재채용 &nbsp;|&nbsp; 입점 / 제휴문의 &nbsp;|&nbsp; 공지사항
-          &nbsp;|&nbsp; 고객의 소리 &nbsp;|&nbsp; 이용약관 &nbsp;|&nbsp;
-          개인정보 &nbsp;|&nbsp; 처리방침 &nbsp;|&nbsp; 쿠팡페이 &nbsp;|&nbsp;
-          이용약관 &nbsp;|&nbsp; 쿠팡페이 &nbsp;|&nbsp; 개인정보처리방침
-          &nbsp;|&nbsp; 신뢰관리센터 &nbsp;|&nbsp; 제휴마케팅 &nbsp;|&nbsp;
-          광고안내
-        </span>
+        <Link href={'/login/TT'}>
+          <span className='text-sm text-gray-700'>
+            회사소개 &nbsp;|&nbsp; Investor &nbsp;|&nbsp; Relations
+            &nbsp;|&nbsp; 인재채용 &nbsp;|&nbsp; 입점 / 제휴문의 &nbsp;|&nbsp;
+            공지사항 &nbsp;|&nbsp; 고객의 소리 &nbsp;|&nbsp; 이용약관
+            &nbsp;|&nbsp; 개인정보 &nbsp;|&nbsp; 처리방침 &nbsp;|&nbsp; 쿠팡페이
+            &nbsp;|&nbsp; 이용약관 &nbsp;|&nbsp; 쿠팡페이 &nbsp;|&nbsp;
+            개인정보처리방침 &nbsp;|&nbsp; 신뢰관리센터 &nbsp;|&nbsp; 제휴마케팅
+            &nbsp;|&nbsp; 광고안내
+          </span>
+        </Link>
       </div>
       <div className='border-t-2 flex justify-center text-xs py-5 my-auto'>
         <div>

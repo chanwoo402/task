@@ -1,3 +1,4 @@
+import Product from '@/components/productGroup';
 import Image from 'next/image';
 
 export default function Wish() {
