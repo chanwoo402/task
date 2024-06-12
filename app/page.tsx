@@ -17,7 +17,7 @@ export default function Login() {
       .from('user')
       .select('*')
       .eq('email', email)
-      .eq('password', password) // Note: Passwords should be hashed in a real application
+      .eq('password', password)
       .single();
 
     if (error || !user) {
@@ -25,7 +25,7 @@ export default function Login() {
     } else {
       setUserInfo(user);
       console.log('Logged in user:', user);
-      setError(null); // Clear any previous errors
+      setError(null);
     }
   };
 
