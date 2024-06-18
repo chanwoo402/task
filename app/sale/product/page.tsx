@@ -1,28 +1,92 @@
+'use client';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { supabase } from '@/supabaseClient';
 import ProductF from '@/components/productGroup';
 
 export default function Product() {
+  const [product, setProduct] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchProduct() {
+      const { data, error } = await supabase.from('product').select('*');
+
+      if (error) {
+        console.error('Error fetching product:', error);
+      } else {
+        setProduct(data);
+      }
+      setLoading(false);
+    }
+
+    fetchProduct();
+  }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!product) {
+    return <p>No product found</p>;
+  }
+
   return (
     <div>
       <div className='border-t border-gray-300 mt-1'>
         <div className='flex justify-center mt-5'>
           <div className='flex flex-col mr-10'>
-            <Image src='/coupang.png' width={70} height={70} alt='어쩔' />
-            <Image src='/coupang.png' width={70} height={70} alt='어쩔' />
-            <Image src='/coupang.png' width={70} height={70} alt='어쩔' />
-            <Image src='/coupang.png' width={70} height={70} alt='어쩔' />
-            <Image src='/coupang.png' width={70} height={70} alt='어쩔' />
-            <Image src='/coupang.png' width={70} height={70} alt='어쩔' />
+            <Image
+              src={product[0].image}
+              width={70}
+              height={70}
+              alt={product[0].name}
+            />
+            <Image
+              src={product[0].image}
+              width={70}
+              height={70}
+              alt={product[0].name}
+            />{' '}
+            <Image
+              src={product[0].image}
+              width={70}
+              height={70}
+              alt={product[0].name}
+            />{' '}
+            <Image
+              src={product[0].image}
+              width={70}
+              height={70}
+              alt={product[0].name}
+            />{' '}
+            <Image
+              src={product[0].image}
+              width={70}
+              height={70}
+              alt={product[0].name}
+            />{' '}
+            <Image
+              src={product[0].image}
+              width={70}
+              height={70}
+              alt={product[0].name}
+            />
           </div>
           <div>
-            <Image src='/coupang.png' width={380} height={380} alt='어쩔' />
+            <Image
+              src={product[0].image}
+              width={380}
+              height={380}
+              alt={product[0].name}
+            />
           </div>
           <div className='m-7 flex flex-col'>
             <div className='flex mb-2'>
               <div className='flex flex-col mr-32'>
-                <p className='text-blue-500 text-xs'>vksaowkdlqslek</p>
-                <p className='mt-1 font-bold'>진짜 안사냐?</p>
+                <p className='text-blue-500 text-xs'>{product[0].name}</p>
+                <p className='mt-1 font-bold'>{product[0].name}</p>
                 <p className='text-xs text-blue-500'>⭐️⭐️⭐️⭐️⭐️ 상품명</p>
               </div>
               <div className='ml-48'>
@@ -60,9 +124,11 @@ export default function Product() {
             </div>
             <div className='pt-2 border-t border-gray-400 mb-3'>
               <p className='mt-3 text-xs'>
-                4% <span className='text-gray-500'>23,535원</span>
+                4% <span className='text-gray-500'>{product[0].price}원</span>
               </p>
-              <p className='text-lg text-red-700 font-bold'>23,434원</p>
+              <p className='text-lg text-red-700 font-bold'>
+                {product[0].price}원
+              </p>
             </div>
             <div className='pt-2 border-t border-gray-200'>
               <p className='mt-2 text-xs font-bold'>무료 배송</p>
@@ -105,196 +171,19 @@ export default function Product() {
             </div>
             <div className='py-3 border-t border-gray-200 mb-3'>
               <p className='text-xs'>
-                - 사용기한 : 개봉 후 사용기간의 경우 제조연월일 병행표기ㅛ
+                - 사용기한 : 개봉 후 사용기간의 경우 제조연월일 병행표기
               </p>
               <p className='text-xs'>- 쿠팡상품번호 : 123414214-1241412</p>
             </div>
           </div>
         </div>
       </div>
-      <div className='flex justify-center mt-5'>
-        <div className='flex flex-col'>
-          <div>
-            <span className='text-2xl font-bold my-5'>
-              오늘의
-              <span className='text-red-700'> 판매자 특가</span>
-            </span>
-            <div className='flex mt-3'>
-              <div className='flex flex-col mr-16'>
-                <Link href={'/sale/product'}>
-                  <Image
-                    src='/coupang.png'
-                    width={150}
-                    height={150}
-                    alt='어쩔'
-                  />
-                  <p className='text-xs font-bold text-red-500'>
-                    ％ 지금 58% 할인 중
-                  </p>
-                  <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-                  <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-                  <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
-                </Link>
-              </div>
-              <div className='flex flex-col mr-16'>
-                <Link href={'/sale/product'}>
-                  <Image
-                    src='/coupang.png'
-                    width={150}
-                    height={150}
-                    alt='어쩔'
-                  />
-                  <p className='text-xs font-bold text-red-500'>
-                    ％ 지금 58% 할인 중
-                  </p>
-                  <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-                  <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-                  <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
-                </Link>
-              </div>
-              <div className='flex flex-col mr-16'>
-                <Link href={'/sale/product'}>
-                  <Image
-                    src='/coupang.png'
-                    width={150}
-                    height={150}
-                    alt='어쩔'
-                  />
-                  <p className='text-xs font-bold text-red-500'>
-                    ％ 지금 58% 할인 중
-                  </p>
-                  <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-                  <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-                  <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
-                </Link>
-              </div>
-              <div className='flex flex-col mr-16'>
-                <Link href={'/sale/product'}>
-                  <Image
-                    src='/coupang.png'
-                    width={150}
-                    height={150}
-                    alt='어쩔'
-                  />
-                  <p className='text-xs font-bold text-red-500'>
-                    ％ 지금 58% 할인 중
-                  </p>
-                  <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-                  <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-                  <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
-                </Link>
-              </div>
-              <div className='flex flex-col'>
-                <Link href={'/sale/product'}>
-                  <Image
-                    src='/coupang.png'
-                    width={150}
-                    height={150}
-                    alt='어쩔'
-                  />
-                  <p className='text-xs font-bold text-red-500'>
-                    ％ 지금 58% 할인 중
-                  </p>
-                  <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-                  <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-                  <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div className='flex justify-center mt-10'>
+      <div className='flex justify-center'>
         <div className='flex flex-col'>
-          <div>
-            <span className='text-2xl font-bold my-5'>
-              오늘의
-              <span className='text-red-700'> 판매자 특가</span>
-            </span>
-            <div className='flex mt-3'>
-              <div className='flex flex-col mr-16'>
-                <Link href={'/sale/product'}>
-                  <Image
-                    src='/coupang.png'
-                    width={150}
-                    height={150}
-                    alt='어쩔'
-                  />
-                  <p className='text-xs font-bold text-red-500'>
-                    ％ 지금 58% 할인 중
-                  </p>
-                  <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-                  <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-                  <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
-                </Link>
-              </div>
-              <div className='flex flex-col mr-16'>
-                <Link href={'/sale/product'}>
-                  <Image
-                    src='/coupang.png'
-                    width={150}
-                    height={150}
-                    alt='어쩔'
-                  />
-                  <p className='text-xs font-bold text-red-500'>
-                    ％ 지금 58% 할인 중
-                  </p>
-                  <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-                  <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-                  <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
-                </Link>
-              </div>
-              <div className='flex flex-col mr-16'>
-                <Link href={'/sale/product'}>
-                  <Image
-                    src='/coupang.png'
-                    width={150}
-                    height={150}
-                    alt='어쩔'
-                  />
-                  <p className='text-xs font-bold text-red-500'>
-                    ％ 지금 58% 할인 중
-                  </p>
-                  <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-                  <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-                  <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
-                </Link>
-              </div>
-              <div className='flex flex-col mr-16'>
-                <Link href={'/sale/product'}>
-                  <Image
-                    src='/coupang.png'
-                    width={150}
-                    height={150}
-                    alt='어쩔'
-                  />
-                  <p className='text-xs font-bold text-red-500'>
-                    ％ 지금 58% 할인 중
-                  </p>
-                  <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-                  <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-                  <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
-                </Link>
-              </div>
-              <div className='flex flex-col'>
-                <Link href={'/sale/product'}>
-                  <Image
-                    src='/coupang.png'
-                    width={150}
-                    height={150}
-                    alt='어쩔'
-                  />
-                  <p className='text-xs font-bold text-red-500'>
-                    ％ 지금 58% 할인 중
-                  </p>
-                  <p className='text-xs mt-1'>데님 가방 당장사라 장난아님</p>
-                  <p className='text-sm mt-1 font-bold text-red-500'>5억원</p>
-                  <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ (2)</p>
-                </Link>
-              </div>
-            </div>
-          </div>
+          <ProductF />
+          <ProductF />
+          <ProductF />
         </div>
       </div>
 
@@ -305,55 +194,60 @@ export default function Product() {
         <div className='col-span-2  border-x border-gray-300 py-3 text-center'>
           <p>상품상세</p>
         </div>
-        <div className='col-span-2 bg-gray-50 border border-gray-300 py-3 text-center'>
-          <p>상품명 (123)</p>
+        <div className='col-span-2  border-x border-gray-300 py-3 text-center'>
+          <p>상품평(1123)</p>
         </div>
-        <div className='col-span-2 bg-gray-50 border border-gray-300 py-3 text-center'>
-          <p>상품문의</p>
+        <div className='col-span-2  border-x border-gray-300 py-3 text-center'>
+          <p>문의</p>
         </div>
-        <div className='col-span-2 bg-gray-50 border border-gray-300 py-3 text-center'>
-          <p>배송/교환/반품 안내</p>
+        <div className='col-span-2  border-x border-gray-300 py-3 text-center'>
+          <p>배송/교환/환불</p>
         </div>
+      </div>
 
+      <div
+        className='mt-10 grid grid-cols-8 border-t-2 border-gray-400 mx-auto'
+        style={{ width: '1030px' }}
+      >
         <p className='col-span-8 text-sm font-bold mt-8 mb-2'>필수 표기정보</p>
 
         <div className='col-span-1 py-3 pl-3 bg-gray-100 text-xs  border-y border-gray-300'>
           <p>제품명</p>
         </div>
         <div className='col-span-3 py-3 pl-3 text-xs  border-y border-gray-300'>
-          <p>김찬우</p>
+          <p>{product[0].name}</p>
         </div>
         <div className='col-span-1 py-3 pl-3 bg-gray-100 text-xs  border-y border-gray-300'>
-          <p>제품명</p>
+          <p>제조사</p>
         </div>
         <div className='col-span-3 py-3 pl-3 text-xs  border-y border-gray-300'>
-          <p>김찬우</p>
+          <p>{product[0].manufacturer}</p>
         </div>
 
         <div className='col-span-1 py-3 pl-3 bg-gray-100 text-xs  '>
-          <p>제품명</p>
+          <p>원산지</p>
         </div>
         <div className='col-span-3 py-3 pl-3 text-xs  '>
-          <p>김찬우</p>
+          <p>{product[0].origin}</p>
         </div>
         <div className='col-span-1 py-3 pl-3 bg-gray-100 text-xs  '>
-          <p>제품명</p>
+          <p>모델명</p>
         </div>
         <div className='col-span-3 py-3 pl-3 text-xs  '>
-          <p>김찬우</p>
+          <p>{product[0].model}</p>
         </div>
 
         <div className='col-span-1 py-3 pl-3 bg-gray-100 text-xs  border-y border-gray-300'>
-          <p>제품명</p>
+          <p>용량</p>
         </div>
         <div className='col-span-3 py-3 pl-3 text-xs  border-y border-gray-300'>
-          <p>김찬우</p>
+          <p>{product[0].capacity}</p>
         </div>
         <div className='col-span-1 py-3 pl-3 bg-gray-100 text-xs  border-y border-gray-300'>
-          <p>제품명</p>
+          <p>색상</p>
         </div>
         <div className='col-span-3 py-3 pl-3 text-xs  border-y border-gray-300'>
-          <p>김찬우</p>
+          <p>{product[0].color}</p>
         </div>
       </div>
     </div>

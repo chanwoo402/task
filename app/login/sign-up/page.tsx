@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { supabase } from '../../../supabaseClient'; // supabaseClient를 사용하여 Supabase 초기화
+import { supabase } from '../../../supabaseClient';
 
 export default function Login() {
   const [email, setEmail] = useState('');
