@@ -4,14 +4,21 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { supabase } from '@/supabaseClient';
 import ProductF from '@/components/productGroup';
+import { useParams } from 'next/navigation';
 
 export default function Product() {
+  const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchProduct() {
-      const { data, error } = await supabase.from('product').select('*');
+      const { data, error } = await supabase
+        .from('product')
+        .select('*')
+        .order('prodnum');
+
+      console.log(data);
 
       if (error) {
         console.error('Error fetching product:', error);
@@ -37,57 +44,47 @@ export default function Product() {
       <div className='border-t border-gray-300 mt-1'>
         <div className='flex justify-center mt-5'>
           <div className='flex flex-col mr-10'>
+            <div className='flex flex-col mr-10'>
+              {Array.from({ length: 6 }).map((_, index) => (
+                <div
+                  key={index}
+                  style={{
+                    width: '70px',
+                    height: '70px',
+                    position: 'relative',
+                  }}
+                >
+                  <Image
+                    src={product[Number(id) - 1].image}
+                    alt={product[Number(id) - 1].name}
+                    layout='fill'
+                    objectFit='cover'
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div
+            style={{ width: '380px', height: '380px', position: 'relative' }}
+          >
             <Image
-              src={product[0].image}
-              width={70}
-              height={70}
-              alt={product[0].name}
-            />
-            <Image
-              src={product[0].image}
-              width={70}
-              height={70}
-              alt={product[0].name}
-            />{' '}
-            <Image
-              src={product[0].image}
-              width={70}
-              height={70}
-              alt={product[0].name}
-            />{' '}
-            <Image
-              src={product[0].image}
-              width={70}
-              height={70}
-              alt={product[0].name}
-            />{' '}
-            <Image
-              src={product[0].image}
-              width={70}
-              height={70}
-              alt={product[0].name}
-            />{' '}
-            <Image
-              src={product[0].image}
-              width={70}
-              height={70}
-              alt={product[0].name}
+              src={product[Number(id) - 1].image}
+              alt={product[Number(id) - 1].name}
+              layout='fill'
+              objectFit='cover'
             />
           </div>
-          <div>
-            <Image
-              src={product[0].image}
-              width={380}
-              height={380}
-              alt={product[0].name}
-            />
-          </div>
+
           <div className='m-7 flex flex-col'>
             <div className='flex mb-2'>
               <div className='flex flex-col mr-32'>
-                <p className='text-blue-500 text-xs'>{product[0].name}</p>
-                <p className='mt-1 font-bold'>{product[0].name}</p>
-                <p className='text-xs text-blue-500'>⭐️⭐️⭐️⭐️⭐️ 상품명</p>
+                <p className='text-blue-500 text-xs'>
+                  {product[Number(id) - 1].seller}
+                </p>
+                <p className='mt-1 font-bold'>{product[Number(id) - 1].name}</p>
+                <p className='text-xs text-blue-500'>
+                  {product[Number(id) - 1].star}⭐️⭐️⭐️⭐️⭐️ 상품명
+                </p>
               </div>
               <div className='ml-48'>
                 <div className='flex mt-3'>
@@ -124,10 +121,19 @@ export default function Product() {
             </div>
             <div className='pt-2 border-t border-gray-400 mb-3'>
               <p className='mt-3 text-xs'>
-                4% <span className='text-gray-500'>{product[0].price}원</span>
+                {Math.round(
+                  (1 -
+                    product[Number(id) - 1].saleprice /
+                      product[Number(id) - 1].price) *
+                    100
+                )}
+                %
+                <span className='text-gray-500'>
+                  {product[Number(id) - 1].price}원
+                </span>
               </p>
               <p className='text-lg text-red-700 font-bold'>
-                {product[0].price}원
+                {product[Number(id) - 1].saleprice}원
               </p>
             </div>
             <div className='pt-2 border-t border-gray-200'>
@@ -156,7 +162,8 @@ export default function Product() {
             <div className='pt-2 border-t border-gray-200 mb-3'>
               <div className='text-xs'>
                 <p>
-                  판매자 :<span className='text-blue-500'>김찬우</span>
+                  판매자 : {product[Number(id) - 1].seller}
+                  <span className='text-blue-500'></span>
                 </p>
               </div>
             </div>
@@ -215,40 +222,50 @@ export default function Product() {
           <p>제품명</p>
         </div>
         <div className='col-span-3 py-3 pl-3 text-xs  border-y border-gray-300'>
-          <p>{product[0].name}</p>
+          <p>{product[Number(id) - 1].name}</p>
         </div>
         <div className='col-span-1 py-3 pl-3 bg-gray-100 text-xs  border-y border-gray-300'>
           <p>제조사</p>
         </div>
         <div className='col-span-3 py-3 pl-3 text-xs  border-y border-gray-300'>
-          <p>{product[0].manufacturer}</p>
+          <p>{product[Number(id) - 1].seller}</p>
         </div>
 
         <div className='col-span-1 py-3 pl-3 bg-gray-100 text-xs  '>
           <p>원산지</p>
         </div>
         <div className='col-span-3 py-3 pl-3 text-xs  '>
-          <p>{product[0].origin}</p>
+          <p>{product[Number(id) - 1].makeplace}</p>
         </div>
         <div className='col-span-1 py-3 pl-3 bg-gray-100 text-xs  '>
           <p>모델명</p>
         </div>
         <div className='col-span-3 py-3 pl-3 text-xs  '>
-          <p>{product[0].model}</p>
+          <p>{product[Number(id) - 1].name}</p>
         </div>
 
         <div className='col-span-1 py-3 pl-3 bg-gray-100 text-xs  border-y border-gray-300'>
           <p>용량</p>
         </div>
         <div className='col-span-3 py-3 pl-3 text-xs  border-y border-gray-300'>
-          <p>{product[0].capacity}</p>
+          <p>{product[Number(id) - 1].capacity}</p>
         </div>
         <div className='col-span-1 py-3 pl-3 bg-gray-100 text-xs  border-y border-gray-300'>
           <p>색상</p>
         </div>
         <div className='col-span-3 py-3 pl-3 text-xs  border-y border-gray-300'>
-          <p>{product[0].color}</p>
+          <p>{product[Number(id) - 1].color}</p>
         </div>
+      </div>
+      <div style={{ width: '1030px' }} className='mx-auto mt-6'>
+        <div className='w-full h-12 bg-red-200 text-red-700 p-3'>
+          <p className=''>
+            {' '}
+            판매자가 현금거래를 요구하면 거부하시고 즉시 사기 거래 신고센터
+            (1670-9832)에 신고하시기 바랍니다.
+          </p>
+        </div>
+        <p className='text-lg '>{product[Number(id) - 1].content}</p>
       </div>
     </div>
   );
