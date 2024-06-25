@@ -12,7 +12,7 @@ export default function ProductGroup() {
       const { data, error } = await supabase
         .from('product')
         .select('*')
-        .limit(15);
+        .limit(10);
 
       if (error) {
         console.error('Error fetching products:', error);
@@ -40,7 +40,7 @@ export default function ProductGroup() {
         <div className='flex mt-3'>
           {products.map((product, index) => (
             <div className='flex flex-col mr-16' key={index}>
-              <Link href={`/sale/product/${Number(product.prodnum)}`}>
+              <Link href={`/sale/product/${product.id}`}>
                 <div
                   style={{
                     position: 'relative',
@@ -62,9 +62,11 @@ export default function ProductGroup() {
                 </p>
                 <p className='text-xs mt-1'>{product.name}</p>
                 <p className='text-sm mt-1 font-bold text-red-500'>
-                  {product.saleprice}원
+                  {product.price}원
                 </p>
-                <p className='mt-1 text-xs'>⭐️⭐️⭐️⭐️⭐️ ({product.star})</p>
+                <p className='mt-1 text-xs'>
+                  ⭐️⭐️⭐️⭐️⭐️ ({product.rating})
+                </p>
               </Link>
             </div>
           ))}

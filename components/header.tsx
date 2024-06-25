@@ -1,6 +1,9 @@
 'use client';
 import Image from 'next/image';
+import { useAuth } from '../context/AuthContext';
 import Link from 'next/link';
+import { supabase } from '@/supabaseClient';
+
 import {
   Dropdown,
   DropdownTrigger,
@@ -10,6 +13,12 @@ import {
 } from '@nextui-org/react';
 
 export default function Header() {
+  const { user } = useAuth(); // 로그인 상태 확인
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut(); // 로그아웃 처리
+  };
+
   const userMenuItems = [
     {
       key: 'new',
@@ -28,31 +37,28 @@ export default function Header() {
           className='bg-slate-200 flex text-xs px-8 py-2 justify-center'
           style={{ width: '1310px' }}
         >
-          <div className='flex '>
+          <div className='flex'>
             <span>즐겨찾기</span>
-            <span className='ml-4 '>입점신청</span>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 16'
-              strokeWidth={1.5}
-              stroke='currentColor'
-              className='w-3 h-3'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                d='m19.5 8.25-7.5 7.5-7.5-7.5'
-              />
-            </svg>
+            <span className='ml-4'>입점신청</span>
+            {/* Dropdown Icon */}
           </div>
           <div className='ml-auto'>
-            <span className='mr-4'>
-              <Link href={'/login'}>로그인</Link>
-            </span>
-            <span className='mr-4'>
-              <Link href={'/login/sign-up'}>회원가입</Link>
-            </span>
+            {user ? (
+              <>
+                <span className='mr-4'>{user.email}</span>{' '}
+                {/* 또는 user.name 등 사용자 이름 표시 */}
+                <button onClick={handleLogout}>로그아웃</button>
+              </>
+            ) : (
+              <>
+                <span className='mr-4'>
+                  <Link href='/login'>로그인</Link>
+                </span>
+                <span className='mr-4'>
+                  <Link href='/login/sign-up'>회원가입</Link>
+                </span>
+              </>
+            )}
             <span>고객센터</span>
           </div>
         </div>

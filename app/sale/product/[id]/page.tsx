@@ -7,11 +7,13 @@ import ProductF from '@/components/productGroup';
 import { useParams } from 'next/navigation';
 
 export default function Product() {
-  const { id } = useParams<{ id: string }>();
+  const params = useParams<{ id: string }>();
+  const id = params ? params.id : null;
   const [product, setProduct] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!id) return;
     async function fetchProduct() {
       const { data, error } = await supabase
         .from('product')
@@ -162,7 +164,7 @@ export default function Product() {
             <div className='pt-2 border-t border-gray-200 mb-3'>
               <div className='text-xs'>
                 <p>
-                  판매자 : {product[Number(id) - 1].seller}
+                  판매자 : {product[Number(id) - 1].name}
                   <span className='text-blue-500'></span>
                 </p>
               </div>
