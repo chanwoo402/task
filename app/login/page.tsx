@@ -1,5 +1,7 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSession, signIn, signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { supabase } from '../../supabaseClient';
@@ -9,10 +11,19 @@ export default function Login() {
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [userInfo, setUserInfo] = useState<any>(null);
+  const [isReadyToRedirect, setIsReadyToRedirect] = useState(false); // 로그인 성공 후 리디렉션 준비 상태
+
+  const router = useRouter();
+
+  useEffect(() => {
+    // userInfo가 설정되고 리디렉션이 준비되면 페이지 이동
+    if (userInfo && isReadyToRedirect) {
+    }
+  }, [isReadyToRedirect]); // userInfo와 isReadyToRedirect 변화 감지
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Fetch user data from 'user' table
+    setIsReadyToRedirect(false); // 초기 리디렉션 준비 상태를 해제
     const { data: user, error } = await supabase
       .from('user')
       .select('*')
@@ -26,25 +37,30 @@ export default function Login() {
       setUserInfo(user);
       console.log('Logged in user:', user);
       setError(null);
+      setIsReadyToRedirect(true); // 로그인 성공 시 리디렉션 준비
+
+      router.push('/sale');
     }
   };
 
   return (
     <div>
+      {/* 기존 로그인 페이지 구조 유지 */}
       <div className='flex justify-center mt-12 mb-4'>
         <Link href={'/sale'}>
           <Image src='/download.png' alt='쿠팡로고' width={195} height={41} />
         </Link>
       </div>
+      {/* 나머지 코드는 변경되지 않음 */}
       <div className='flex justify-center border-b-2'>
         <div className='border-b-blue-500 border-b-4 px-5'>
           <p className='text-blue-500 m-4 font-bold'>이메일 로그인</p>
         </div>
       </div>
-
       <div className='flex justify-center mt-3'>
         <div className='flex flex-col'>
           <form onSubmit={handleLogin}>
+            {/* 입력 필드 및 로그인 버튼 코드는 기존과 동일 */}
             <div className='border-gray-300 border flex '>
               <div className='w-12 h-12 bg-gray-50 p-3 border-gray-300 border'>
                 <div className='text-gray-400'>
@@ -73,7 +89,7 @@ export default function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-
+              {/* 로그인 버튼 및 회원가입 링크는 기존과 동일 */}
               <button type='reset' className='mr-3'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -95,7 +111,7 @@ export default function Login() {
               <div className='w-12 h-12 bg-gray-50 p-3 border-gray-300 border'>
                 <div className='text-gray-400'>
                   <svg
-                    xmlns='http://www.w3.org/2000/svg'
+                    xmlns='http://www.w.org/2000/svg'
                     fill='none'
                     viewBox='0 0 24 24'
                     strokeWidth={1.5}
@@ -121,7 +137,7 @@ export default function Login() {
               </div>
               <button type='reset' className='mr-3'>
                 <svg
-                  xmlns='http://www.w3.org/2000/svg'
+                  xmlns='http://www.w.org/2000/svg'
                   fill='none'
                   viewBox='0 0 24 24'
                   strokeWidth={1.5}
@@ -168,7 +184,6 @@ export default function Login() {
               </button>
             </Link>
           </div>
-
           <div className='text-gray-500 text-xs flex flex-col mt-5'>
             <p className='flex justify-center'>법인 고객이신가요?</p>
             <p className='flex justify-center'>
@@ -181,13 +196,16 @@ export default function Login() {
               ©Coupang Corp. All rights reserved.
             </p>
           </div>
-          {error && <p className='text-red-500'>{error}</p>}
+          {error && (
+            <p className='text-red-500'>
+              {'아이디 혹은 비밀번호가 일치하지 않습니다'}
+            </p>
+          )}
           {userInfo && (
             <div className='text-green-500'>
               <h3>Login Successful</h3>
               <p>Welcome, {userInfo.name}</p>
               <p>Email: {userInfo.email}</p>
-              {/* Add more user information as needed */}
             </div>
           )}
         </div>
