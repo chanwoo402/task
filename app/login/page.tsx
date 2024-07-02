@@ -1,57 +1,46 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { useSession, signIn, signOut } from 'next-auth/react';
+
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
-import Link from 'next/link';
-import { supabase } from '../../supabaseClient';
+import axios from 'axios';
+import { useUser } from '@/context/UserContext';
 
 export default function Login() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
-  const [userInfo, setUserInfo] = useState<any>(null);
-  const [isReadyToRedirect, setIsReadyToRedirect] = useState(false); // 로그인 성공 후 리디렉션 준비 상태
-
   const router = useRouter();
-
-  useEffect(() => {
-    // userInfo가 설정되고 리디렉션이 준비되면 페이지 이동
-    if (userInfo && isReadyToRedirect) {
-    }
-  }, [isReadyToRedirect]); // userInfo와 isReadyToRedirect 변화 감지
+  const { setUser } = useUser();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsReadyToRedirect(false); // 초기 리디렉션 준비 상태를 해제
-    const { data: user, error } = await supabase
-      .from('user')
-      .select('*')
-      .eq('email', email)
-      .eq('password', password)
-      .single();
+    try {
+      const response = await axios.post('/api/login', {
+        email,
+        password,
+      });
 
-    if (error || !user) {
-      setError(error?.message || 'Invalid login credentials');
-    } else {
-      setUserInfo(user);
-      console.log('Logged in user:', user);
-      setError(null);
-      setIsReadyToRedirect(true); // 로그인 성공 시 리디렉션 준비
-
-      router.push('/sale');
+      const { data } = response;
+      if (data.token) {
+        // JWT 토큰을 로컬 스토리지에 저장
+        localStorage.setItem('token', data.token);
+        setUser(data.user);
+        router.push('/sale');
+      } else {
+        setError('Invalid login credentials');
+      }
+    } catch (err: any) {
+      setError(err.response?.data?.error || 'An unexpected error occurred');
     }
   };
 
   return (
     <div>
-      {/* 기존 로그인 페이지 구조 유지 */}
       <div className='flex justify-center mt-12 mb-4'>
-        <Link href={'/sale'}>
-          <Image src='/download.png' alt='쿠팡로고' width={195} height={41} />
-        </Link>
+        <a href='/sale'>
+          <img src='/download.png' alt='쿠팡로고' width={195} height={41} />
+        </a>
       </div>
-      {/* 나머지 코드는 변경되지 않음 */}
       <div className='flex justify-center border-b-2'>
         <div className='border-b-blue-500 border-b-4 px-5'>
           <p className='text-blue-500 m-4 font-bold'>이메일 로그인</p>
@@ -60,8 +49,7 @@ export default function Login() {
       <div className='flex justify-center mt-3'>
         <div className='flex flex-col'>
           <form onSubmit={handleLogin}>
-            {/* 입력 필드 및 로그인 버튼 코드는 기존과 동일 */}
-            <div className='border-gray-300 border flex '>
+            <div className='border-gray-300 border flex'>
               <div className='w-12 h-12 bg-gray-50 p-3 border-gray-300 border'>
                 <div className='text-gray-400'>
                   <svg
@@ -89,7 +77,6 @@ export default function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              {/* 로그인 버튼 및 회원가입 링크는 기존과 동일 */}
               <button type='reset' className='mr-3'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -111,7 +98,7 @@ export default function Login() {
               <div className='w-12 h-12 bg-gray-50 p-3 border-gray-300 border'>
                 <div className='text-gray-400'>
                   <svg
-                    xmlns='http://www.w.org/2000/svg'
+                    xmlns='http://www.w3.org/2000/svg'
                     fill='none'
                     viewBox='0 0 24 24'
                     strokeWidth={1.5}
@@ -137,7 +124,7 @@ export default function Login() {
               </div>
               <button type='reset' className='mr-3'>
                 <svg
-                  xmlns='http://www.w.org/2000/svg'
+                  xmlns='http://www.w3.org/2000/svg'
                   fill='none'
                   viewBox='0 0 24 24'
                   strokeWidth={1.5}
@@ -147,12 +134,7 @@ export default function Login() {
                   <path
                     strokeLinecap='round'
                     strokeLinejoin='round'
-                    d='M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z'
-                  />
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z'
+                    d='m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z'
                   />
                 </svg>
               </button>
@@ -178,11 +160,11 @@ export default function Login() {
             </div>
           </form>
           <div className='pt-4 border-t border-gray-400'>
-            <Link href={'/login/sign-up'}>
+            <a href={'/login/sign-up'}>
               <button className='w-full py-3 rounded border border-gray-400'>
                 회원가입
               </button>
-            </Link>
+            </a>
           </div>
           <div className='text-gray-500 text-xs flex flex-col mt-5'>
             <p className='flex justify-center'>법인 고객이신가요?</p>
@@ -200,13 +182,6 @@ export default function Login() {
             <p className='text-red-500'>
               {'아이디 혹은 비밀번호가 일치하지 않습니다'}
             </p>
-          )}
-          {userInfo && (
-            <div className='text-green-500'>
-              <h3>Login Successful</h3>
-              <p>Welcome, {userInfo.name}</p>
-              <p>Email: {userInfo.email}</p>
-            </div>
           )}
         </div>
       </div>

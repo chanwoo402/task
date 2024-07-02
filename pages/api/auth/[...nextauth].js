@@ -7,7 +7,7 @@ export default NextAuth({
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        username: { label: 'Username', type: 'text', placeholder: 'jsmith' },
+        username: { label: 'Username', type: 'text', placeholder: '찬우' },
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
@@ -19,7 +19,12 @@ export default NextAuth({
 
         const data = response.data;
         if (data) {
-          return { name: data.name, email: data.email, token: data.token };
+          return {
+            id: data.id,
+            name: data.name,
+            email: data.email,
+            token: data.token,
+          };
         } else {
           return null;
         }
@@ -27,13 +32,29 @@ export default NextAuth({
     }),
   ],
   callbacks: {
-    async session({ session, token }) {
-      session.token = token.token;
+    jwt: async ({ token, user, account }) => {
+      if (user) {
+        token.userId = user.id;
+        token.userName = user.name;
+      }
+      return token;
+    },
+    session: async ({ session, token }) => {
+      if (token) {
+        session.user.id = token.userId;
+        session.user.name = token.userName;
+      }
       return session;
     },
   },
   session: {
     strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    maxAge: 10 * 60, // 10 minutes
+    updateAge: 60 * 60, // 24 hours
+    cookie: {
+      secure: true, // HTTPS 환경에서만 쿠키 사용
+      httpOnly: true, // JavaScript에서 쿠키 접근 불가
+      sameSite: 'lax', // CSRF 보호
+    },
   },
 });

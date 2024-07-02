@@ -41,6 +41,24 @@ export default function Product() {
     return <p>No product found</p>;
   }
 
+  const addToCart = async () => {
+    if (!product || !id) return; // product와 id가 유효한지 확인
+
+    const { error } = await supabase.from('cart').insert([
+      {
+        cartnum: id, // 현재 로그인된 사용자 ID
+        prodnum: id, // useParams에서 가져온 상품 ID
+        result: false, // 결과값을 항상 false로 설정
+      },
+    ]);
+
+    if (error) {
+      console.error('Error adding to cart:', error);
+    } else {
+      alert('장바구니 추가 하하ㅏㅎ!');
+    }
+  };
+
   return (
     <div>
       <div className='border-t border-gray-300 mt-1'>
@@ -145,9 +163,12 @@ export default function Product() {
             </div>
             <div className='grid grid-cols-2 gap-4 mt-3'>
               <button>
-                <div className='col-span-1 border border-blue-400 p-2 text-center text-base font-bold text-blue-500'>
-                  <p>장바구니 담기</p>
-                </div>
+                <button onClick={addToCart}>
+                  {' '}
+                  <div className='col-span-1 border border-blue-400 p-2 text-center text-base font-bold text-blue-500 px-32'>
+                    <p>장바구니 담기</p>
+                  </div>
+                </button>
               </button>
               <button>
                 <div className='col-span-1 border border-blue-400 p-2 text-center text-base font-bold bg-blue-600 text-white'>

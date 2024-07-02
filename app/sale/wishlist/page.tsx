@@ -1,7 +1,57 @@
-import Product from '@/components/productGroup';
+'use client';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { supabase } from '@/supabaseClient';
 
 export default function Wish() {
+  const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchWishlist() {
+      // love 테이블에서 lovenum, loveb가 true인 데이터를 가져옵니다.
+      const { data: loves, error: loveError } = await supabase
+        .from('love')
+        .select('lovenum')
+        .eq('loveb', true);
+
+      if (loveError) {
+        console.error('Error fetching love data:', loveError);
+        setLoading(false);
+        return;
+      }
+
+      // product 테이블에서 모든 데이터를 가져옵니다.
+      const { data: products, error: productError } = await supabase
+        .from('product')
+        .select('*');
+
+      if (productError) {
+        console.error('Error fetching product data:', productError);
+        setLoading(false);
+        return;
+      }
+
+      // love 테이블의 lovenum과 product 테이블의 prodnum이 일치하는 데이터를 필터링합니다.
+      const wishlistProducts = products.filter((product: any) =>
+        loves.some((love: any) => love.lovenum === product.prodnum)
+      );
+
+      setProducts(wishlistProducts);
+      setLoading(false);
+    }
+
+    fetchWishlist();
+  }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!products.length) {
+    return <p>No items in wishlist</p>;
+  }
+
   return (
     <div className='flex flex-col items-center mt-10 mb-40'>
       <div className='w-full flex justify-center'>
@@ -40,42 +90,37 @@ export default function Wish() {
               선택삭제
             </button>
           </div>
-          <div className='border-b border-gray-300 w-full p-3 flex'>
-            <div>
-              <input type='checkbox' />
+
+          {products.map((product: any) => (
+            <div
+              key={product.prodnum}
+              className='border-b border-gray-300 w-full p-3 flex'
+            >
+              <div>
+                <input type='checkbox' />
+              </div>
+              <Image
+                src={product.image}
+                width={100}
+                height={100}
+                alt={product.name}
+              />
+              <div className='flex flex-col ml-3 mt-1'>
+                <p className='text-sm font-bold'>{product.name}</p>
+                <p className='text-sm text-red-600 font-bold mt-2'>
+                  {product.saleprice.toLocaleString()}원
+                </p>
+              </div>
+              <div className='flex flex-col ml-auto mr-3 my-auto'>
+                <button className='border border-blue-500 text-blue-500 w-32 py-1 text-xs rounded-sm'>
+                  장바구니 담기
+                </button>
+                <button className='border border-gray-400 text-gray-500 w-32 py-1 text-xs rounded-sm mt-2'>
+                  삭제
+                </button>
+              </div>
             </div>
-            <Image src='/coupang.png' width={100} height={100} alt='어쩔' />
-            <div className='flex flex-col ml-3 mt-1'>
-              <p className='text-sm font-bold'>제품명 </p>
-              <p className='text-sm text-red-600 font-bold mt-2'>1,123,123원</p>
-            </div>
-            <div className='flex flex-col ml-auto mr-3 my-auto'>
-              <button className='border border-blue-500 text-blue-500 w-32 py-1 text-xs rounded-sm'>
-                장바구니 담기
-              </button>
-              <button className='border border-gray-400 text-gray-500 w-32 py-1 text-xs rounded-sm mt-2'>
-                삭제
-              </button>
-            </div>
-          </div>
-          <div className='border-b border-gray-300 w-full p-3 flex'>
-            <div>
-              <input type='checkbox' />
-            </div>
-            <Image src='/coupang.png' width={100} height={100} alt='어쩔' />
-            <div className='flex flex-col ml-3 mt-1'>
-              <p className='text-sm font-bold'>제품명 </p>
-              <p className='text-sm text-red-600 font-bold mt-2'>1,123,123원</p>
-            </div>
-            <div className='flex flex-col ml-auto mr-3 my-auto'>
-              <button className='border border-blue-500 text-blue-500 w-32 py-1 text-xs rounded-sm'>
-                장바구니 담기
-              </button>
-              <button className='border border-gray-400 text-gray-500 w-32 py-1 text-xs rounded-sm mt-2'>
-                삭제
-              </button>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

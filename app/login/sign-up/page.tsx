@@ -16,7 +16,7 @@ export default function Login() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setError('비밀번호가 다릅니다.');
       return;
     }
 

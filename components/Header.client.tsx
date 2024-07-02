@@ -1,7 +1,11 @@
 'use client';
-import { useSession, signIn, signOut } from 'next-auth/react';
+
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useUser } from '../context/UserContext';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
 import {
   Dropdown,
   DropdownTrigger,
@@ -11,11 +15,23 @@ import {
 } from '@nextui-org/react';
 
 export default function Header() {
+  const { user, setUser } = useUser();
   const { data: session, status } = useSession();
+  const router = useRouter();
 
   if (status === 'loading') {
     return <div>Loading...</div>;
   }
+
+  const signOut = async () => {
+    try {
+      await axios.post('/api/logout');
+      setUser(null);
+      router.push('/sale');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
 
   const userMenuItems = [
     { key: 'new', label: '주문 목록', href: '/sale/orderlist' },
@@ -29,7 +45,7 @@ export default function Header() {
           className='bg-slate-200 flex text-xs px-8 py-2 justify-center'
           style={{ width: '1310px' }}
         >
-          <div className='flex '>
+          <div className='flex'>
             <span>즐겨찾기</span>
             <span className='ml-4 '>입점신청</span>
             <svg
@@ -48,21 +64,21 @@ export default function Header() {
             </svg>
           </div>
           <div className='ml-auto'>
-            {session?.user ? (
+            {user || session?.user ? (
               <>
                 <span className='mr-4'>
-                  <Link href='/profile'>{session.user.name || '유저'}</Link>
+                  <Link href='/profile'>
+                    {user?.user_name || session?.user?.name || '유저'}
+                  </Link>
                 </span>
                 <span className='mr-4'>
-                  <button onClick={() => signOut()}>로그아웃</button>
+                  <button onClick={signOut}>로그아웃</button>
                 </span>
               </>
             ) : (
               <>
                 <span className='mr-4'>
-                  <Link href='/login' onClick={() => signIn()}>
-                    로그인
-                  </Link>
+                  <Link href='/login'>로그인</Link>
                 </span>
                 <span className='mr-4'>
                   <Link href='/signup'>회원가입</Link>
@@ -131,10 +147,11 @@ export default function Header() {
                       </Button>
                     </DropdownTrigger>
                     <DropdownMenu>
-                      <DropdownItem key='all'>전체</DropdownItem>
-                      <DropdownItem key='electronics'>전자제품</DropdownItem>
-                      <DropdownItem key='fashion'>패션</DropdownItem>
-                      <DropdownItem key='home'>가정용품</DropdownItem>
+                      {userMenuItems.map((item) => (
+                        <DropdownItem key={item.key}>
+                          <Link href={item.href}>{item.label}</Link>
+                        </DropdownItem>
+                      ))}
                     </DropdownMenu>
                   </Dropdown>
                 </div>
@@ -205,7 +222,9 @@ export default function Header() {
                     </DropdownTrigger>
                     <DropdownMenu aria-label='User Actions'>
                       {userMenuItems.map((item) => (
-                        <DropdownItem key={item.key}>{item.label}</DropdownItem>
+                        <DropdownItem key={item.key}>
+                          <Link href={item.href}>{item.label}</Link>
+                        </DropdownItem>
                       ))}
                     </DropdownMenu>
                   </Dropdown>

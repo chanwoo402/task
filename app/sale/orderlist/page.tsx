@@ -1,7 +1,84 @@
-import Image from 'next/image';
+'use client';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { supabase } from '@/supabaseClient';
+
+// Product와 CartItem 타입을 정의합니다.
+type Product = {
+  prodnum: number;
+  image: string;
+  name: string;
+  saleprice: number;
+};
+
+type CartItem = {
+  id: number;
+  result: boolean;
+  quantity: number;
+  product: Product;
+};
 
 export default function Orderlist() {
+  const [orderItems, setOrderItems] = useState<CartItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchOrderItems() {
+      // 모든 제품을 가져옵니다.
+      const { data: products, error: productError } = await supabase
+        .from('product')
+        .select('prodnum, image, name, saleprice');
+
+      if (productError) {
+        console.error('상품 가져오기 에러:', productError);
+        setLoading(false);
+        return;
+      }
+
+      // 장바구니 항목을 가져옵니다.
+      const { data: cartItems, error: cartError } = await supabase
+        .from('cart')
+        .select('cartnum, result')
+        .eq('result', true);
+
+      if (cartError) {
+        console.error('주문 아이템 가져오기 에러:', cartError);
+        setLoading(false);
+        return;
+      }
+
+      // cartItems의 product_id와 products의 prodnum을 비교하여 일치하는 제품 정보를 추가합니다.
+      const formattedData: CartItem[] = cartItems.map((item: any) => {
+        const product = products.find(
+          (product: any) => product.prodnum === item.cartnum
+        );
+        if (!product) {
+          throw new Error(`Product with prodnum ${item.product_id} not found`);
+        }
+        return {
+          id: item.id,
+          result: item.result,
+          quantity: item.quantity || 1,
+          product: product,
+        };
+      });
+
+      setOrderItems(formattedData);
+      setLoading(false);
+    }
+
+    fetchOrderItems();
+  }, []);
+
+  if (loading) {
+    return <p>로딩 중...</p>;
+  }
+
+  if (!orderItems.length) {
+    return <p>주문한 상품이 없습니다.</p>;
+  }
+
   return (
     <div className='flex justify-center'>
       <div className='flex flex-col w-40 mt-5'>
@@ -161,69 +238,71 @@ export default function Orderlist() {
           </div>
 
           <div className='mt-8 border border-gray-100 rounded px-6 pb-6 shadow-md'>
-            <div className=' flex'>
-              <span className='text-lg m-3 font-bold'>2020.12.12 주문</span>
-              <span className='ml-auto text-blue-600 mt-4'>주문 상세보기</span>
-            </div>
-            <div className='grid grid-cols-7 border rounded'>
-              <div className='col-span-5 flex flex-col px-6 border-r'>
+            {orderItems.map((item) => (
+              <div key={item.id} className='mt-4'>
                 <div className='flex'>
-                  <p className='my-3 text-xl font-bold'>배송완료</p>
-                  <p className='my-3 text-lg text-green-600 ml-3'>
-                    12/26(토) 도착
-                  </p>
-
-                  <div className='ml-auto mt-3'>
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      stroke-width='1.5'
-                      stroke='currentColor'
-                      className='w-6 h-6'
-                    >
-                      <path
-                        stroke-linecap='round'
-                        stroke-linejoin='round'
-                        d='M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z'
-                      />
-                    </svg>
-                  </div>
+                  <span className='text-lg m-3 font-bold'>2020.12.12 주문</span>
+                  <span className='ml-auto text-blue-600 mt-4'>
+                    주문 상세보기
+                  </span>
                 </div>
-                <div className='flex mb-5'>
-                  <div className='my-4 '>
-                    <Image
-                      src='/coupang.png'
-                      width={50}
-                      height={50}
-                      alt='어쩔'
-                    />
-                  </div>
-                  <div className='flex flex-col ml-2 text-sm'>
-                    <p className='w-80'>
-                      물품명물품명물품명물품명물품명물품명물품명물품명
-                      물품명물품명물품명물품명물품명물품명물품명
-                    </p>
+                <div className='grid grid-cols-7 border rounded'>
+                  <div className='col-span-5 flex flex-col px-6 border-r'>
                     <div className='flex'>
-                      <p className='w-80 font-light mt-2 '>
-                        1,010,101,010,100원 - 1개
+                      <p className='my-3 text-xl font-bold'>배송완료</p>
+                      <p className='my-3 text-lg text-green-600 ml-3'>
+                        12/26(토) 도착
                       </p>
-                      <button className='border p-2 mt-2 text-sm'>
-                        장바구니 담기
-                      </button>
+                      <div className='ml-auto mt-3'>
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          fill='none'
+                          viewBox='0 0 24 24'
+                          strokeWidth='1.5'
+                          stroke='currentColor'
+                          className='w-6 h-6'
+                        >
+                          <path
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            d='M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z'
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    <div className='flex mb-5'>
+                      <div className='my-4 '>
+                        <Image
+                          src={item.product.image}
+                          width={50}
+                          height={50}
+                          alt={item.product.name}
+                        />
+                      </div>
+                      <div className='flex flex-col ml-2 text-sm'>
+                        <p className='w-80'>{item.product.name}</p>
+                        <div className='flex'>
+                          <p className='w-80 font-light mt-2 '>
+                            {item.product.saleprice}원 - {item.quantity}개
+                          </p>
+                          <button className='border p-2 mt-2 text-sm'>
+                            장바구니 담기
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                  <div className='col-span-2 p-5 text-center my-auto'>
+                    <button className='w-full border border-blue-600 py-2 text-blue-600 rounded text-sm'>
+                      배송조회
+                    </button>
+                    <button className='w-full border border-gray-300 py-2 rounded text-sm mt-2'>
+                      교환, 반품 신청
+                    </button>
+                  </div>
                 </div>
               </div>
-              <div className='col-span-2 p-5 text-center my-auto'>
-                <button className='w-full border border-blue-600 py-2 text-blue-600 rounded text-sm'>
-                  배송조회
-                </button>
-                <button className='w-full border border-gray-300 py-2 rounded text-sm mt-2'>
-                  교환, 반품 신청
-                </button>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
